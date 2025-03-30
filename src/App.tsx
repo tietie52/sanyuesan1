@@ -1,13 +1,15 @@
-import React from'react';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from'react-router-dom';
 import Sidebar from './Sidebar';
 import Hexinyi from './XInyi/Hexinyi';
+import Zhongxinna from './TiAom-z/Zhongxinna'; // 确保文件名大小写一致
 import InitialPage from './InitialPage';
 
 const App = () => {
   const menuItems = [
     { label: '何芯轶', link: '/Hexinyi' },
-    {label:'',link:'/InitialPage'}
+    { label: '钟馨娜', link: '/Zhongxinna' }, 
+    // 移除初始页面的菜单项
   ];
   return (
     <Router>
@@ -16,6 +18,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<InitialPage />} />
           <Route path="/Hexinyi" element={<Hexinyi />} />
+          <Route path="/Zhongxinna" element={<Zhongxinna />} />
         </Routes>
       </div>
     </Router>
