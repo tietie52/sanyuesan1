@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 // 定义海绵宝宝相关人物类型
 type SpongeBobCharacter = {
@@ -8,7 +8,6 @@ type SpongeBobCharacter = {
   audioUrl: string;
   quote: string; 
 };
-
 
 export const spongeBobCharacters: SpongeBobCharacter[] = [
   {
@@ -42,18 +41,33 @@ export const spongeBobCharacters: SpongeBobCharacter[] = [
 ];
 
 const SpongeBobCharacterPage: React.FC = () => {
+  // 为每个角色创建一个状态来记录点击次数
+  const [clickCounts, setClickCounts] = useState<{ [key: string]: number }>({});
+
+  const handleImageClick = (name: string) => {
+    setClickCounts(prevState => ({
+      ...prevState,
+      [name]: (prevState[name] || 0) + 1
+    }));
+  };
+
   return (
-    <div className="p-4 bg-yellow-100 min-h-screen"> {/* 更改背景颜色 */}
-      <h1 className="text-4xl font-bold text-center mb-8 text-orange-600">海绵宝宝欢乐世界</h1> {/* 更改标题样式 */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"> {/* 调整网格布局 */}
+    <div className="p-4 bg-yellow-100 min-h-screen"> 
+      <h1 className="text-4xl font-bold text-center mb-8 text-orange-600">海绵宝宝欢乐世界</h1> 
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"> 
         {spongeBobCharacters.map((character) => (
-          <div key={character.name} className="bg-white p-4 rounded-lg shadow-xl transform hover:scale-105 transition duration-300"> {/* 添加悬停效果 */}
-            <img src={character.imageUrl} alt={character.name} className="w-full h-48 object-cover mb-2 rounded-md" />
+          <div key={character.name} className="bg-white p-4 rounded-lg shadow-xl transform hover:scale-105 transition duration-300"> 
+            <img 
+              src={character.imageUrl} 
+              alt={character.name} 
+              className="w-full h-48 object-cover mb-2 rounded-md"
+              onClick={() => handleImageClick(character.name)}
+            />
             <h2 className="text-2xl font-bold mb-2 text-blue-600" aria-label={`人物名字：${character.name}`}>{character.name}</h2>
             <p className="mb-1 text-gray-700" aria-label={`人物描述：${character.description}`}>{character.description}</p>
-            <p className="mb-2 italic text-gray-600">名言: "{character.quote}"</p> {/* 显示角色名言 */}
-            
-             
+            {Array.from({ length: clickCounts[character.name] || 0 }).map((_, index) => (
+              <p key={index} className="mb-2 italic text-gray-600">名言: "{character.quote}"</p>
+            ))}
           </div>
         ))}
       </div>
