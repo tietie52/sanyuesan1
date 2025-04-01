@@ -1,4 +1,3 @@
-// src/Maowenhui.tsx
 import React, { useState } from 'react';
 
 type PawPatrolCharacter = {
@@ -12,7 +11,7 @@ type PawPatrolCharacter = {
 
 const PawPatrolPage: React.FC = () => {
   const [selectedChar, setSelectedChar] = useState<string | null>(null);
-
+  const [isDarkMode, setIsDarkMode] = useState(false);
   // 完整汪汪队成员数据
   const pawPatrolCharacters: PawPatrolCharacter[] = [
     {
@@ -75,10 +74,17 @@ const PawPatrolPage: React.FC = () => {
   ];
 
   return (
-    <div className="p-4 bg-blue-50 min-h-screen">
+    <div className={`p-4 min-h-screen ${isDarkMode ? 'bg-gray-900' : 'bg-blue-50'}`}>
+    
       <h1 className="text-3xl font-bold text-center mb-8 text-blue-600">
         🐾 汪汪队立大功 - 全员集合 🐾
       </h1>
+      <button 
+        onClick={() => setIsDarkMode(!isDarkMode)}
+        className="px-4 py-2 rounded-lg bg-blue-500 text-white"
+      >
+        {isDarkMode ? '☀️ 日间模式' : '🌙 夜间模式'} {/* 新增行4-7 */}
+      </button>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {pawPatrolCharacters.map((character) => (
