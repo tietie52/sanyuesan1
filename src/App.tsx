@@ -7,6 +7,7 @@ import InitialPage from './InitialPage';
 import Yyqx from './Chengtingting/Yyqx';
 import Maowenhui from './Chengzipi/Maowenhui'
 import Linxiang from './Qinlinxiang/Linxiang'
+import Xiaowen from './Zhouxiaowen/Xiaowen'
 
 const App = () => {
   const menuItems = [
@@ -15,6 +16,7 @@ const App = () => {
     { label: '陈婷婷', link: '/Chengtingting' },
     {label:'毛文慧', link:'/Maowenhui'}, 
     {label:'覃林祥', link:'/QinLinxiang'},
+    {label:'周小雯', link:'/Zhouxiaowen'},
     // 移除初始页面的菜单项
   ];
   return (
@@ -28,6 +30,7 @@ const App = () => {
           <Route path="/Chengtingting" element={<Yyqx />} />
           <Route path="/Maowenhui" element={<Maowenhui />} />
           <Route path="/Qinlinxiang" element={<Linxiang />} />
+          <Route path="/Zhouxiaowen" element={<Xiaowen />} />
         </Routes>
       </div>
     </Router>
